@@ -1,0 +1,41 @@
+# Jetsite - Git Repository
+
+# OS and Editor specific files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# VS Code
+.vscode/
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+
+# Temporary files
+*.tmp
+*.temp
+temp_*/
+
+# Logs
+*.log
+
+# Runtime files
+*.pid
+*.seed
+*.pid.lock
+
+# Windows specific
+ehthumbs.db
+Desktop.ini
+
+# PowerShell execution policy bypass artifacts
+*.ps1.bak
+
+# Test repositories created by the scripts
+test-*
+example-*
+sample-*
+jetsite_saas/
