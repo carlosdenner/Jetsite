@@ -206,11 +206,36 @@ You can modify the script to:
 
 ## Contributing
 
-1. Fork this repository
-2. Create a feature branch: `git checkout -b feature-name`
-3. Commit your changes: `git commit -am 'Add some feature'`
-4. Push to the branch: `git push origin feature-name`
-5. Submit a pull request
+We welcome contributions! Please see our [Contributing Guide](docs/CONTRIBUTING.md) for details.
+
+## Documentation
+
+- 📖 **[Usage Guide](docs/USAGE.md)** - Detailed usage instructions and advanced features
+- 💡 **[Examples](docs/EXAMPLES.md)** - Practical examples and popular templates
+- 🗺️ **[Roadmap](docs/ROADMAP.md)** - Planned features and development timeline
+- 📝 **[Changelog](docs/CHANGELOG.md)** - Version history and release notes
+- 🤝 **[Contributing](docs/CONTRIBUTING.md)** - How to contribute to the project
+
+## What's Next?
+
+We're actively developing Jetsite with exciting features planned:
+
+### 🎯 Version 1.1 (Q3 2025)
+- **Enhanced CLI**: Non-interactive mode, verbose output, progress indicators
+- **Configuration Management**: Global config files, template bookmarking
+- **PowerShell Improvements**: Core compatibility, tab completion
+
+### 🚀 Version 1.2 (Q4 2025)
+- **Multi-IDE Support**: IntelliJ, Sublime Text, Vim integration
+- **Automation**: Post-creation hooks, dependency installation
+- **VS Code Enhancements**: Extension recommendations, workspace setup
+
+### 🌟 Version 2.0 (Q2 2026)
+- **Container Support**: Docker integration, devcontainer setup
+- **Cloud Integration**: AWS, Azure, Google Cloud platform support
+- **AI Features**: Intelligent template recommendations
+
+See our complete [Roadmap](docs/ROADMAP.md) for detailed plans and how to get involved!
 
 ## License
 
@@ -225,6 +250,11 @@ This project is open source. Please check the LICENSE file for details.
 ## Support
 
 If you encounter issues or have questions:
-1. Check the troubleshooting section above
-2. Create an issue in this repository
-3. Consult the GitHub CLI documentation
+1. Check the [Usage Guide](docs/USAGE.md) and [troubleshooting section](docs/USAGE.md#troubleshooting)
+2. Review the [Examples](docs/EXAMPLES.md) for common scenarios
+3. Create an issue in this repository
+4. Consult the GitHub CLI documentation
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.

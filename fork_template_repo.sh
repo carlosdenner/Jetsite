@@ -11,6 +11,62 @@
 # Requirements: GitHub CLI (gh), Git, VS Code (optional)
 #
 
+# ============================================================================
+# HELP SYSTEM
+# ============================================================================
+
+show_help() {
+    cat << EOF
+
+🚀 Jetsite - GitHub Template Repository Forker
+   Create new projects from GitHub template repositories
+
+USAGE:
+   ./fork_template_repo.sh [OPTIONS]
+
+OPTIONS:
+   -h, --help    Show this help message
+
+DESCRIPTION:
+   This script helps you create new GitHub repositories from templates.
+   It will prompt you for:
+   • Template repository (owner/repo format)
+   • New repository name
+
+   The script will:
+   1. Create a new repository from the template
+   2. Fall back to forking if template creation fails
+   3. Clone the repository locally
+   4. Open the project in VS Code
+
+REQUIREMENTS:
+   • GitHub CLI (gh) - Install from https://cli.github.com/
+   • Git - For cloning repositories
+   • VS Code (optional) - For automatic project opening
+
+EXAMPLES:
+   ./fork_template_repo.sh
+   # Follow the interactive prompts
+
+SPECIAL CASES:
+   • GitHub doesn't allow forking your own repositories
+   • Use a different script for cloning your own repos
+
+MORE INFO:
+   • Documentation: README.md
+   • Usage Guide: docs/USAGE.md
+   • Examples: docs/EXAMPLES.md
+   • Contributing: docs/CONTRIBUTING.md
+
+EOF
+}
+
+# Check for help flags
+if [[ "$1" == "-h" || "$1" == "--help" ]]; then
+    show_help
+    exit 0
+fi
+
 # Enable strict error handling
 # -e: Exit immediately if a command exits with a non-zero status
 # -u: Treat unset variables as an error when substituting

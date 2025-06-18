@@ -11,8 +11,61 @@
 # Platform: Windows PowerShell
 #
 
+param(
+    [switch]$h,
+    [switch]$help
+)
+
 # Enable strict error handling
 $ErrorActionPreference = "Stop"
+
+# ============================================================================
+# HELP SYSTEM
+# ============================================================================
+
+if ($h -or $help) {
+    Write-Host ""
+    Write-Host "🚀 Jetsite - GitHub Template Repository Forker" -ForegroundColor Cyan
+    Write-Host "   Create new projects from GitHub template repositories" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "USAGE:" -ForegroundColor Yellow
+    Write-Host "   .\fork_template_repo.ps1 [OPTIONS]" -ForegroundColor White
+    Write-Host ""
+    Write-Host "OPTIONS:" -ForegroundColor Yellow
+    Write-Host "   -h, -help     Show this help message" -ForegroundColor White
+    Write-Host ""
+    Write-Host "DESCRIPTION:" -ForegroundColor Yellow
+    Write-Host "   This script helps you create new GitHub repositories from templates." -ForegroundColor White
+    Write-Host "   It will prompt you for:" -ForegroundColor White
+    Write-Host "   • Template repository (owner/repo format)" -ForegroundColor Gray
+    Write-Host "   • New repository name" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "   The script will:" -ForegroundColor White
+    Write-Host "   1. Create a new repository from the template" -ForegroundColor Gray
+    Write-Host "   2. Fall back to forking if template creation fails" -ForegroundColor Gray
+    Write-Host "   3. Clone the repository locally" -ForegroundColor Gray
+    Write-Host "   4. Open the project in VS Code" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "REQUIREMENTS:" -ForegroundColor Yellow
+    Write-Host "   • GitHub CLI (gh) - Install from https://cli.github.com/" -ForegroundColor White
+    Write-Host "   • Git - For cloning repositories" -ForegroundColor White
+    Write-Host "   • VS Code (optional) - For automatic project opening" -ForegroundColor White
+    Write-Host ""
+    Write-Host "EXAMPLES:" -ForegroundColor Yellow
+    Write-Host "   .\fork_template_repo.ps1" -ForegroundColor White
+    Write-Host "   # Follow the interactive prompts" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "SPECIAL CASES:" -ForegroundColor Yellow
+    Write-Host "   • To clone your own repository: Use .\clone_own_repo.ps1" -ForegroundColor White
+    Write-Host "   • GitHub doesn't allow forking your own repositories" -ForegroundColor Gray
+    Write-Host ""    Write-Host "MORE INFO:" -ForegroundColor Yellow
+    Write-Host "   • Documentation: README.md" -ForegroundColor White
+    Write-Host "   • Usage Guide: docs/USAGE.md" -ForegroundColor White
+    Write-Host "   • Examples: docs/EXAMPLES.md" -ForegroundColor White
+    Write-Host "   • Contributing: docs/CONTRIBUTING.md" -ForegroundColor White
+    Write-Host ""
+    exit 0
+}
 
 # ============================================================================
 # DEPENDENCY CHECK

@@ -8,8 +8,57 @@
 # Version: 1.0
 #
 
+param(
+    [switch]$h,
+    [switch]$help
+)
+
 # Enable strict error handling
 $ErrorActionPreference = "Stop"
+
+# ============================================================================
+# HELP SYSTEM
+# ============================================================================
+
+if ($h -or $help) {
+    Write-Host ""
+    Write-Host "🔄 Jetsite - Own Repository Cloner" -ForegroundColor Cyan
+    Write-Host "   Create new projects from your own GitHub repositories" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "USAGE:" -ForegroundColor Yellow
+    Write-Host "   .\clone_own_repo.ps1 [OPTIONS]" -ForegroundColor White
+    Write-Host ""
+    Write-Host "OPTIONS:" -ForegroundColor Yellow
+    Write-Host "   -h, -help     Show this help message" -ForegroundColor White
+    Write-Host ""
+    Write-Host "DESCRIPTION:" -ForegroundColor Yellow
+    Write-Host "   This script helps you create new projects based on your own repositories." -ForegroundColor White
+    Write-Host "   GitHub doesn't allow forking your own repositories, so this script:" -ForegroundColor White
+    Write-Host "   • Creates a new empty repository" -ForegroundColor Gray
+    Write-Host "   • Clones your source repository" -ForegroundColor Gray
+    Write-Host "   • Removes git history and sets up fresh history" -ForegroundColor Gray
+    Write-Host "   • Pushes to the new repository" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "   The script will prompt you for:" -ForegroundColor White
+    Write-Host "   • Source repository (owner/repo format)" -ForegroundColor Gray
+    Write-Host "   • New repository name" -ForegroundColor Gray
+    Write-Host "   • Repository visibility (public/private)" -ForegroundColor Gray
+    Write-Host ""
+    Write-Host "REQUIREMENTS:" -ForegroundColor Yellow
+    Write-Host "   • GitHub CLI (gh) - Install from https://cli.github.com/" -ForegroundColor White
+    Write-Host "   • Git - For cloning and repository operations" -ForegroundColor White
+    Write-Host "   • VS Code (optional) - For automatic project opening" -ForegroundColor White
+    Write-Host ""
+    Write-Host "EXAMPLES:" -ForegroundColor Yellow
+    Write-Host "   .\clone_own_repo.ps1" -ForegroundColor White
+    Write-Host "   # Follow the interactive prompts" -ForegroundColor Gray
+    Write-Host ""    Write-Host "SEE ALSO:" -ForegroundColor Yellow
+    Write-Host "   • For external templates: .\fork_template_repo.ps1" -ForegroundColor White
+    Write-Host "   • Documentation: README.md" -ForegroundColor White
+    Write-Host "   • Usage Guide: docs/USAGE.md" -ForegroundColor White
+    Write-Host ""
+    exit 0
+}
 
 Write-Host ""
 Write-Host "🔄 Jetsite - Own Repository Cloner" -ForegroundColor Cyan
