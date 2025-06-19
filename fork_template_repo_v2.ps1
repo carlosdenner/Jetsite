@@ -229,7 +229,18 @@ try {
 # LOCAL SETUP
 # ============================================================================
 
-try {    $GITHUB_USERNAME = & gh api user --jq .login
+try {
+    $GITHUB_USERNAME = & gh api user --jq .login
+    if ($LASTEXITCODE -ne 0) {
+        throw "Failed to get username"
+    }
+} catch {
+    Write-JetsiteOutput "❌ Error: Failed to get GitHub username." -IsError
+    if (-not $quiet) { Read-Host "Press Enter to exit" }
+    exit 1
+}
+
+try {
     $REPO_URL = "https://github.com/$GITHUB_USERNAME/$NEW_REPO_NAME.git"
     Write-JetsiteOutput ""
     Write-JetsiteOutput "Clone: Cloning repository to local machine..." -Color "Cyan"
