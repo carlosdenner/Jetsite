@@ -1,0 +1,9 @@
+{
+    "Port":  3001,
+    "JetsiteScript":  "D:\\repos\\Jetsite\\agent\\..\\fork_template_repo_v2.ps1",
+    "LogLevel":  "Info",
+    "PollInterval":  30,
+    "WorkDir":  ".\\workspace",
+    "MaxConcurrentTasks":  3,
+    "TaskRetentionHours":  24
+}

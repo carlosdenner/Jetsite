@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jetsite Agent - Web Interface</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #2d3748, #4a5568);
+            color: white;
+            padding: 30px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+        }
+        
+        .header p {
+            opacity: 0.8;
+            font-size: 1.1rem;
+        }
+        
+        .content {
+            padding: 30px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e2e8f0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+        
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+        
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+        }
+        
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .checkbox-group input[type="checkbox"] {
+            width: auto;
+        }
+        
+        .btn {
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+            width: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+        }
+        
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .status {
+            margin-top: 20px;
+            padding: 15px;
+            border-radius: 8px;
+            display: none;
+        }
+        
+        .status.success {
+            background: #f0fff4;
+            border: 1px solid #9ae6b4;
+            color: #276749;
+        }
+        
+        .status.error {
+            background: #fed7d7;
+            border: 1px solid #feb2b2;
+            color: #c53030;
+        }
+        
+        .status.loading {
+            background: #ebf8ff;
+            border: 1px solid #90cdf4;
+            color: #2b6cb0;
+        }
+        
+        .task-details {
+            margin-top: 15px;
+            font-family: 'Courier New', monospace;
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            border-left: 4px solid #667eea;
+        }
+        
+        .templates {
+            margin-top: 30px;
+        }
+        
+        .templates h3 {
+            margin-bottom: 15px;
+            color: #2d3748;
+        }
+        
+        .template-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 15px;
+        }
+        
+        .template-card {
+            background: #f7fafc;
+            padding: 15px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 2px solid transparent;
+        }
+        
+        .template-card:hover {
+            background: #edf2f7;
+            border-color: #667eea;
+        }
+        
+        .template-card.selected {
+            border-color: #667eea;
+            background: #ebf8ff;
+        }
+        
+        .template-name {
+            font-weight: 600;
+            color: #2d3748;
+        }
+        
+        .template-desc {
+            font-size: 0.9rem;
+            color: #718096;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🚀 Jetsite Agent</h1>
+            <p>Create GitHub repositories from templates with ease</p>
+        </div>
+        
+        <div class="content">
+            <form id="repoForm">
+                <div class="templates">
+                    <h3>Popular Templates</h3>
+                    <div class="template-grid">
+                        <div class="template-card" data-template="facebook/react">
+                            <div class="template-name">React</div>
+                            <div class="template-desc">Facebook's React library</div>
+                        </div>
+                        <div class="template-card" data-template="vercel/next.js">
+                            <div class="template-name">Next.js</div>
+                            <div class="template-desc">The React Framework</div>
+                        </div>
+                        <div class="template-card" data-template="microsoft/vscode-extension-samples">
+                            <div class="template-name">VS Code Extension</div>
+                            <div class="template-desc">VS Code extension samples</div>
+                        </div>
+                        <div class="template-card" data-template="expressjs/express">
+                            <div class="template-name">Express.js</div>
+                            <div class="template-desc">Fast, minimalist web framework</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="template">Template Repository</label>
+                    <input type="text" id="template" name="template" placeholder="owner/repository-name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Repository Name</label>
+                    <input type="text" id="name" name="name" placeholder="my-awesome-project" required>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="visibility">Visibility</label>
+                        <select id="visibility" name="visibility">
+                            <option value="public">Public</option>
+                            <option value="private">Private</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label>&nbsp;</label>
+                        <div class="checkbox-group">
+                            <input type="checkbox" id="noVSCode" name="noVSCode">
+                            <label for="noVSCode">Skip VS Code opening</label>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="postCommands">Post-Creation Commands (optional)</label>
+                    <textarea id="postCommands" name="postCommands" rows="3" placeholder="npm install; npm start"></textarea>
+                </div>
+                
+                <button type="submit" class="btn" id="submitBtn">Create Repository</button>
+            </form>
+            
+            <div id="status" class="status"></div>
+        </div>
+    </div>
+
+    <script>
+        class JetsiteClient {
+            constructor() {
+                this.baseUrl = 'http://localhost:3000';
+                this.apiKey = 'your-secret-api-key'; // In production, this should be secure
+            }
+
+            async createRepository(data) {
+                const response = await fetch(`${this.baseUrl}/create-repository`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-API-Key': this.apiKey
+                    },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                return response.json();
+            }
+
+            async getTaskStatus(taskId) {
+                const response = await fetch(`${this.baseUrl}/task/${taskId}`, {
+                    headers: {
+                        'X-API-Key': this.apiKey
+                    }
+                });
+
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+
+                return response.json();
+            }
+        }
+
+        const client = new JetsiteClient();
+        let currentTaskId = null;
+        let pollInterval = null;
+
+        // Template selection
+        document.querySelectorAll('.template-card').forEach(card => {
+            card.addEventListener('click', () => {
+                // Remove previous selection
+                document.querySelectorAll('.template-card').forEach(c => c.classList.remove('selected'));
+                
+                // Select current card
+                card.classList.add('selected');
+                
+                // Update template input
+                document.getElementById('template').value = card.dataset.template;
+            });
+        });
+
+        // Form submission
+        document.getElementById('repoForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const formData = new FormData(e.target);
+            const data = {
+                template: formData.get('template'),
+                name: formData.get('name'),
+                visibility: formData.get('visibility'),
+                noVSCode: formData.get('noVSCode') === 'on',
+                postCommands: formData.get('postCommands') || undefined
+            };
+
+            const submitBtn = document.getElementById('submitBtn');
+            const statusDiv = document.getElementById('status');
+
+            try {
+                // Disable submit button
+                submitBtn.disabled = true;
+                submitBtn.textContent = 'Creating Repository...';
+
+                // Show loading status
+                showStatus('loading', 'Creating repository from template...');
+
+                // Submit request
+                const result = await client.createRepository(data);
+                currentTaskId = result.taskId;
+
+                showStatus('loading', `Task created: ${result.taskId}\\nMonitoring progress...`);
+
+                // Start polling for task status
+                startPolling();
+
+            } catch (error) {
+                showStatus('error', `Error: ${error.message}`);
+                resetForm();
+            }
+        });
+
+        function showStatus(type, message) {
+            const statusDiv = document.getElementById('status');
+            statusDiv.className = `status ${type}`;
+            statusDiv.style.display = 'block';
+            statusDiv.innerHTML = message.replace(/\\n/g, '<br>');
+        }
+
+        function resetForm() {
+            const submitBtn = document.getElementById('submitBtn');
+            submitBtn.disabled = false;
+            submitBtn.textContent = 'Create Repository';
+            
+            if (pollInterval) {
+                clearInterval(pollInterval);
+                pollInterval = null;
+            }
+        }
+
+        function startPolling() {
+            if (!currentTaskId) return;
+
+            pollInterval = setInterval(async () => {
+                try {
+                    const task = await client.getTaskStatus(currentTaskId);
+                    
+                    if (task.status === 'completed') {
+                        clearInterval(pollInterval);
+                        const result = JSON.parse(task.result || '{}');
+                        showStatus('success', 
+                            `✅ Repository created successfully!<br>` +
+                            `📁 Name: ${task.name}<br>` +
+                            `🌐 GitHub: https://github.com/${result.repositoryName || task.name}<br>` +
+                            `📂 Local: ${result.workingDirectory || 'N/A'}`
+                        );
+                        resetForm();
+                        
+                    } else if (task.status === 'failed') {
+                        clearInterval(pollInterval);
+                        showStatus('error', `❌ Task failed: ${task.error || 'Unknown error'}`);
+                        resetForm();
+                        
+                    } else {
+                        showStatus('loading', 
+                            `Status: ${task.status}<br>` +
+                            `Task ID: ${task.id}<br>` +
+                            `Started: ${task.startedAt ? new Date(task.startedAt).toLocaleTimeString() : 'Not started'}`
+                        );
+                    }
+                } catch (error) {
+                    console.error('Polling error:', error);
+                    showStatus('error', `Polling error: ${error.message}`);
+                    clearInterval(pollInterval);
+                    resetForm();
+                }
+            }, 2000); // Poll every 2 seconds
+        }
+
+        // Auto-generate repository name from template
+        document.getElementById('template').addEventListener('input', (e) => {
+            const template = e.target.value;
+            const nameField = document.getElementById('name');
+            
+            if (template && !nameField.value) {
+                const templateName = template.split('/').pop();
+                nameField.value = `my-${templateName}`;
+            }
+        });
+    </script>
+</body>
+</html>

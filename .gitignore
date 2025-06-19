@@ -14,6 +14,30 @@ Thumbs.db
 !.vscode/launch.json
 !.vscode/extensions.json
 
+# Node.js
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+.npm
+.yarn-integrity
+.pnp.*
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Agent workspace and generated files
+agent/workspace/
+agent/jetsite-template-test-*/
+agent/test-template-check/
+agent/agent-error.log
+agent/agent.log
+
 # Temporary files
 *.tmp
 *.temp
@@ -35,7 +59,18 @@ Desktop.ini
 *.ps1.bak
 
 # Test repositories created by the scripts
-test-*
-example-*
-sample-*
+test-repo-*
+example-repo-*
+sample-repo-*
+jetsite-quick-demo-*
+jetsite-template-test-*
 jetsite_saas/
+
+# Build outputs
+dist/
+build/
+out/
+
+# Lock files (keep package-lock.json for consistency)
+bun.lockb
+yarn.lock

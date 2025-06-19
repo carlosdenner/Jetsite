@@ -5,7 +5,127 @@ All notable changes to the Jetsite project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [Unreleased]
+## [2.0.0] - 2025-06-18
+
+### 🚀 Major Release: Complete Automation Platform
+
+#### Added
+- **Jetsite Agent System** - Self-hosted automation platform
+  - Node.js agent with REST API (Express.js, Winston logging)
+  - PowerShell agent with HTTP server and job management
+  - Task queue management with background processing
+  - Real-time status monitoring and progress tracking
+  - Health check and diagnostic endpoints
+  - External queue polling support (optional)
+
+- **Enhanced PowerShell Scripts**
+  - `fork_template_repo_v2.ps1` - Advanced version with full feature set
+  - `fork_template_repo_simple.ps1` - Streamlined, reliable implementation
+  - `clone_own_repo.ps1` - Alternative for non-forkable repositories
+  - Cross-platform compatibility improvements
+  - Non-interactive mode support for automation
+  - CLI help flags (`-h`, `--help`) for all scripts
+
+- **Agent Management Tools**
+  - `start-agent.ps1` - Automatic agent startup with GitHub authentication
+  - `quick-demo.ps1` - End-to-end workflow demonstration
+  - `full-demo-test.ps1` - Comprehensive testing suite
+  - `test-auth.ps1` - GitHub authentication validation
+  - `troubleshoot-new.ps1` - Complete system diagnostics
+  - `debug-auth.ps1` - Authentication debugging utilities
+  - `test-template-check.ps1` - Template repository validation
+
+- **Web Interface & API**
+  - `web-interface.html` - Browser-based agent control panel
+  - RESTful API endpoints for repository creation
+  - JSON-based task configuration and status reporting
+  - API authentication and security features
+  - CORS support for web applications
+
+- **Documentation & Testing**
+  - `docs/IMPLEMENTATION.md` - Complete system documentation
+  - `docs/USAGE.md` - User guide and examples
+  - `docs/ROADMAP.md` - Future development plans
+  - `agent/README.md` - Agent-specific documentation
+  - Comprehensive test utilities and validation scripts
+
+#### Changed
+- **Improved GitHub Authentication**
+  - Automatic token detection from GitHub CLI
+  - Environment variable inheritance for child processes
+  - Token verification at agent startup
+  - Robust error handling for authentication failures
+
+- **Enhanced Error Handling**
+  - Comprehensive error reporting and logging
+  - Process isolation and cleanup
+  - Graceful degradation for missing dependencies
+  - Detailed troubleshooting information
+
+- **Cross-Platform Support**
+  - Windows PowerShell and PowerShell Core compatibility
+  - Linux and macOS support via bash scripts
+  - Platform-specific optimizations
+  - Universal command-line interface
+
+- **Template Repository Support**
+  - Support for any GitHub template repository
+  - Template validation and verification
+  - User-specific template configuration
+  - Fallback templates for testing
+
+#### Fixed
+- **PowerShell Syntax Issues**
+  - Resolved emoji character encoding problems
+  - Fixed missing newlines and statement separation
+  - Corrected variable scoping conflicts
+  - Improved null coalescing operator compatibility
+
+- **Process Management**
+  - Fixed variable name shadowing (`process` → `childProcess`)
+  - Proper child process cleanup and error handling
+  - Resolved environment variable inheritance issues
+  - Improved background job management
+
+- **Authentication Problems**
+  - Resolved 401 Unauthorized errors
+  - Fixed GitHub token detection and usage
+  - Corrected API key validation for development
+  - Improved credential handling security
+
+#### Security
+- **Enhanced Authentication**
+  - Secure GitHub token handling
+  - Environment variable protection
+  - API key validation (configurable)
+  - Process isolation and sandboxing
+
+- **Input Validation**
+  - Repository name sanitization
+  - Template URL validation
+  - Command injection prevention
+  - Safe parameter handling
+
+### Technical Improvements
+- **Performance Optimizations**
+  - Asynchronous task processing
+  - Efficient memory usage
+  - Optimized logging and monitoring
+  - Reduced startup time
+
+- **Code Quality**
+  - Comprehensive error handling
+  - Proper resource cleanup
+  - Modular architecture
+  - Extensive testing coverage
+
+- **Monitoring & Observability**
+  - Structured logging with Winston
+  - Health check endpoints
+  - Performance metrics collection
+  - Debug utilities and diagnostics
+
+## [1.0.0] - 2025-06-17
 
 ### Added
 - Initial project documentation

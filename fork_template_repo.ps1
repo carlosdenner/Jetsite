@@ -13,7 +13,12 @@
 
 param(
     [switch]$h,
-    [switch]$help
+    [switch]$help,
+    [string]$template,
+    [string]$name,
+    [string]$visibility = "public",
+    [switch]$noVSCode,
+    [switch]$quiet
 )
 
 # Enable strict error handling
@@ -141,10 +146,9 @@ Write-Host "🚀 Creating repository '$NEW_REPO_NAME' from template '$TEMPLATE_R
 
 try {
     # Try to create repository from template
-    $createResult = & gh repo create $NEW_REPO_NAME --template $TEMPLATE_REPO --public 2>&1
+    & gh repo create $NEW_REPO_NAME --template $TEMPLATE_REPO --public 2>&1
     if ($LASTEXITCODE -eq 0) {
         Write-Host "✅ Template-based repository created successfully." -ForegroundColor Green
-        $creationSuccessful = $true
     } else {
         throw "Template creation failed"
     }
@@ -173,11 +177,10 @@ try {
         Write-Host "🔄 Renaming forked repository '$ORIGINAL_NAME' to '$NEW_REPO_NAME'..." -ForegroundColor Cyan
         & gh api --method PATCH "/repos/$OWNER/$ORIGINAL_NAME" -F name="$NEW_REPO_NAME"
         if ($LASTEXITCODE -ne 0) {
-            throw "Failed to rename repository"
-        }
+            throw "Failed to rename repository"        }
         
         Write-Host "✅ Repository forked and renamed successfully." -ForegroundColor Green
-        $creationSuccessful = $true    } catch {
+    } catch {
         Write-Host "❌ Error: Both template creation and forking failed." -ForegroundColor Red
         Write-Host ""
         Write-Host "Common causes:" -ForegroundColor Yellow

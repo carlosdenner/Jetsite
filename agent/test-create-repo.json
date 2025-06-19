@@ -1,0 +1,7 @@
+{
+  "template": "carlosdenner/Jetsite_template",
+  "name": "my-test-project",
+  "visibility": "public",
+  "noVSCode": false,
+  "postCommands": "npm install"
+}
