@@ -5,6 +5,39 @@ All notable changes to the Jetsite project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [2.1.0] - 2024-12-28
+
+### 🔧 Project Refactoring and Cleanup
+
+#### Changed
+- **Repository Structure Cleanup**
+  - Removed all `node_modules` directories from git tracking
+  - Updated `.gitignore` with comprehensive exclusion patterns
+  - Excluded workspace artifacts, logs, and temporary files from version control
+  - Organized agent test scripts and demo files
+
+#### Fixed
+- **PowerShell Script Quality**
+  - Resolved all PowerShell Script Analyzer warnings and issues
+  - Fixed syntax errors and improved error handling across all scripts
+  - Enhanced authentication handling with proper GitHub token management
+  - Improved cross-platform compatibility
+
+#### Added
+- **Comprehensive Test Suite**
+  - Added `test-auth.ps1` for GitHub authentication validation
+  - Added `test-api.ps1` for agent API endpoint testing
+  - Added `test-direct.ps1` for direct script execution testing
+  - Added `test-template-check.ps1` for template validation
+  - Added `debug-auth.ps1` for authentication troubleshooting
+
+#### Documentation
+- **Project Documentation Update**
+  - Enhanced README.md with clearer installation and usage instructions
+  - Updated all documentation to reflect new project structure
+  - Added comprehensive examples and troubleshooting guides
+  - Documented agent capabilities and API endpoints
+
 ## [2.0.0] - 2025-06-18
 
 ### 🚀 Major Release: Complete Automation Platform
