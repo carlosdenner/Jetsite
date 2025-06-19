@@ -179,7 +179,8 @@ try {
     } else {
         throw "Template creation failed"
     }
-} catch {
+} 
+catch {
     # Fallback method: Fork and rename
     Write-JetsiteOutput "⚠️  Template creation failed; falling back to forking method..." -IsWarning
     
@@ -217,8 +218,7 @@ try {
         Write-JetsiteOutput ""
         Write-JetsiteOutput "Solutions:" -Color "Cyan"
         Write-JetsiteOutput "• If it's your repo: Use .\clone_own_repo.ps1 instead" -Color "Cyan"
-        Write-JetsiteOutput "• Set up your repo as a template in GitHub Settings" -Color "Cyan"
-        Write-JetsiteOutput "• Try a different template repository" -Color "Cyan"
+        Write-JetsiteOutput "• Set up your repo as a template in GitHub Settings" -Color "Cyan"        Write-JetsiteOutput "• Try a different template repository" -Color "Cyan"
         Write-JetsiteOutput ""
         if (-not $quiet) { Read-Host "Press Enter to exit" }
         exit 1
